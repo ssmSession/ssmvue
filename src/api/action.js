@@ -7,7 +7,8 @@ export default {
   'SERVER': 'http://localhost:8080/', //服务器
   'USER_LOGIN': '/user/login',
   'USER_REGISTER':'/user/register',
-
+  'GETPHONE':'/user/phone',
+  
   'getFullPath': k => { //获得请求的完整地址，用于mockjs测试时使用
     return this.SERVER + this[k];
   }

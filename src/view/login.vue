@@ -1,5 +1,5 @@
-<template>
-  <div>
+<template >
+  <div class="app">
     <div class="loginToHome">
       <el-form ref="form" :model="form" status-icon label-width="80px" class="loginForm">
         <h3>登录</h3>
@@ -42,7 +42,7 @@
               message: '登录成功',
               type: 'success'
             })
-             // this.$router.push('/Home');
+             this.$router.push('/BorrowMoney');
           }else{
             this.$message({
               message: '用户名或者密码错误录',
@@ -60,6 +60,12 @@
   }
 </script>
 <style>
+  .app{
+    background-image: url(../assets/xx.jpg);
+    width:100%px;
+    height: 100%px;
+  }
+
   .loginToHome {
     position: absolute;
     left: 0px;
@@ -68,7 +74,7 @@
     bottom: 0;
     margin: auto;
     width: 400px;
-    height: 260px;
+    height: 300px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
     background: #fff;
@@ -82,7 +88,7 @@
     top: 10px;
   }
 
-  .homeBut {
+ /* .homeBut {
     position: absolute;
     left: 0px;
   }
@@ -90,5 +96,5 @@
   .loginBut {
     position: absolute;
     right: 0px;
-  }
+  } */
 </style>
