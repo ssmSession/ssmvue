@@ -13,13 +13,13 @@
       </template>
     </el-menu-item>
 
-    <el-submenu v-for=" m in moduleDatas" :key="m.id" :index="'index_' + m.id">
+    <el-submenu v-for="m in moduleDatas" :key="m.id" :index="'index_' + m.id">
       <template slot="title">
         <i :class="m.icon"></i>
         <span>{{m.text}}</span>
       </template>
 
-      <el-menu-item v-for="cm in m.childrens" :key="cm.id" :index="cm.url">
+      <el-menu-item v-for="cm in m.ssmModules" :key="cm.id" :index="cm.url">
         <samp>{{cm.text}}</samp>
       </el-menu-item>
     </el-submenu>
@@ -75,11 +75,11 @@
 
     //生命 生命周期钩子函数
     created: function() {
-      let url = this.axios.urls.SYSTEM_SYS_MODULES;
+      let url = this.axios.urls.SYS_GETMODULES;
 
       this.axios.get(url).then(resp => {
         //把参数值给双向数据绑定
-        this.moduleDatas = resp.data;
+        this.moduleDatas = resp.data.data;
       }).catch(error => {
         console.log(error);
       })

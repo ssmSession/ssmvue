@@ -2,15 +2,48 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Main from '@/admin/Main'
+import Home from '@/admin/Home'
+import Login from '@/view/login.vue'
+import Register from '@/view/register.vue'
+import pum from '@/admin/security/pum'
+import staff from '@/admin/security/staff'
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
-  ]
+	routes: [{
+			path: '/',
+			name: 'Login',
+			component: Login
+		},
+		{
+			path: '/Register',
+			name: 'Register',
+			component: Register
+		},
+
+		{
+			path: '/Main',
+			name: 'Main',
+			component: Main,
+			children: [
+
+				{
+					path: '/Home',
+					name: 'Home',
+					component: Home,
+				},
+				{
+					path: '/security/pum',
+					name: 'pum',
+					component: pum,
+				},
+				{
+					path: '/security/staff',
+					name: 'staff',
+					component: staff,
+				},
+			]
+		}
+	]
 })
