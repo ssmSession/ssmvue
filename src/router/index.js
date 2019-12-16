@@ -1,22 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-<<<<<<< HEAD
+
 import Login from '@/view/login'
 import Register from '@/view/register'
 import BorrowMoney from '@/invest/BorrowMoney'
-=======
-import Login from '@/view/login.vue'
-import Register from '@/view/register.vue'
 import InvestList from '@/investment/investinform/InvestList'
->>>>>>> e7fa247e6a22f3d383308e97f6180ac6a05fe420
+import AboutOur from '@/invest/AboutOur.vue'
+import Index from '@/invest/index.vue'
+
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
+  routes: [{
+      path: '/Login',
       name: 'Login',
       component: Login
     },
@@ -26,15 +24,26 @@ export default new Router({
       component: Register
     },
     {
-<<<<<<< HEAD
-      path: '/BorrowMoney',
-      name: 'BorrowMoney',
-      component: BorrowMoney
-=======
-      path: '/InvestList',
-      name: 'InvestList',
-      component: InvestList
->>>>>>> e7fa247e6a22f3d383308e97f6180ac6a05fe420
+      path: '/',
+      name: 'Index',
+      component: Index,
+      children: [
+        {
+          path: '/Index/BorrowMoney',
+          name: 'BorrowMoney',
+          component: BorrowMoney
+        },
+        {
+          path: '/Index/InvestList',
+          name: 'InvestList',
+          component: InvestList
+        },
+        {
+          path: '/Index/AboutOur',
+          name: 'AboutOur',
+          component: AboutOur
+        },
+      ]
     }
   ]
 })

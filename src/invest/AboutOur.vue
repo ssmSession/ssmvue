@@ -1,16 +1,9 @@
 <template>
-
-<div>
-<img src="../assets/logs.png">
-
-</div>
-
+  <i>你好</i>
 </template>
 
 <script>
-
 </script>
 
 <style>
-
 </style>

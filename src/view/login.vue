@@ -1,5 +1,5 @@
 <template >
-   <!-- 登录页面 --> 
+   <!-- 登录页面 -->
     <div class="loginToHome">
       <el-form ref="form" :model="form" status-icon label-width="80px" class="loginForm">
         <h3>登录</h3>
@@ -41,7 +41,7 @@
               message: '登录成功',
               type: 'success'
             })
-             this.$router.push('/BorrowMoney');//跳转到首页
+             this.$router.push('/');//跳转到首页
           }else{
             this.$message({
               message: '用户名或者密码错误录',
@@ -58,8 +58,8 @@
     }
   }
 </script>
-<style>
-  
+<style scoped>
+
 
   .loginToHome {
     position: absolute;

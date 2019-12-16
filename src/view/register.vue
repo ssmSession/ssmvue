@@ -21,7 +21,7 @@
           </el-button>
         </el-form-item>
         <el-form-item>
-          <a href="login.vue"><span style="color: gray">返回登录</span></a>
+          <a href="" @click="goPath('Login')"><span style="color: gray">返回登录</span></a>
           <el-button class="loginBut" type="primary" plain @click="register('form')">注册</el-button>
         </el-form-item>
       </el-form>
@@ -49,15 +49,19 @@
         return callback();
       };
       var checkName=(rule, value, callback) => {
-        const manReg=/^([\u4e00-\u9fa5]{2,6})$/;
-        if (manReg.test(value)) {
-          callback();
-        } else {
-          callback(new Error('请输入用户名'));
+        // const manReg=/^([\u4e00-\u9fa5]{2,6})$/;
+        if (!value) {
+          return callback(new Error('不允许为空'));
         }
         return callback();
       };
       var checkPassword=(rule, value, callback) => {
+        const pwd=/^[A-Za-z]+[0-9]+[A-Za-z0-9]*|[0-9]+[A-Za-z]+[A-Za-z0-9]*$/g;
+        if (pwd.test(value)) {
+          callback();
+        } else {
+          callback(new Error('密码由6-16位字母和数字组成'));
+        }
         if (!value) {
           return callback(new Error('不允许为空'));
         }
@@ -94,6 +98,10 @@
       }
     },
     methods: {
+      goPath(path){
+        // this.$router.replace();
+        this.$router.push({path:'/'+path+''});
+      },
       register: function(formName) {
         this.$refs[formName].validate((valid) => {
            if (valid) {
@@ -118,7 +126,7 @@
                   message: '注册成功',
                   type: 'success'
                 })
-                this.$router.push('/BorrowMoney');
+                this.$router.push('/');
               } else {
                 this.$message({
                   message: '注册失败',
