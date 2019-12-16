@@ -71,8 +71,8 @@
     top: 0;
     bottom: 0;
     margin: auto;
-    width: 400px;
-    height: 260px;
+    width: 460px;
+    height: 420px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
     background: #fff;
