@@ -1,5 +1,5 @@
 <template >
-  <div class="app">
+   <!-- 登录页面 --> 
     <div class="loginToHome">
       <el-form ref="form" :model="form" status-icon label-width="80px" class="loginForm">
         <h3>登录</h3>
@@ -15,7 +15,6 @@
         </el-form-item>
       </el-form>
     </div>
-  </div>
 </template>
 <script>
   export default {
@@ -29,7 +28,7 @@
       }
     },
     methods: {
-      login: function() {
+      login: function() {//登录按钮
         let url=this.axios.urls.USER_LOGIN;
         let param={
           username:this.form.username,
@@ -42,7 +41,7 @@
               message: '登录成功',
               type: 'success'
             })
-             this.$router.push('/BorrowMoney');
+             this.$router.push('/BorrowMoney');//跳转到首页
           }else{
             this.$message({
               message: '用户名或者密码错误录',
@@ -53,18 +52,14 @@
           alert(error);
         })
       },
-      register:function(){
+      register:function(){//注册按钮
         this.$router.push('/Register');
       }
     }
   }
 </script>
 <style>
-  .app{
-    background-image: url(../assets/xx.jpg);
-    width:100%px;
-    height: 100%px;
-  }
+  
 
   .loginToHome {
     position: absolute;
