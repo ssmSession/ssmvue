@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 注册页面-->
     <div class="loginToHome">
       <el-form ref="form" :rules="rules" :model="form" status-icon label-width="80px" class="loginForm">
         <h3>用户注册</h3>

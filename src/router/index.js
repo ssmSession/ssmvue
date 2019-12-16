@@ -1,13 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import Main from '@/admin/Main'
 import Home from '@/admin/Home'
-import Register from '@/view/register.vue'
 import pum from '@/admin/security/pum'
 import staff from '@/admin/security/staff'
 import Login from '@/view/login'
 import BorrowMoney from '@/invest/BorrowMoney'
+import Register from '@/view/register.vue'
+import InvestList from '@/investment/investinform/InvestList'
+import Main from '@/admin/Main'
 
 Vue.use(Router)
 
@@ -27,8 +28,7 @@ export default new Router({
 			path: '/Main',
 			name: 'Main',
 			component: Main,
-			children: [
-				{
+			children: [{
 					path: '/Home',
 					name: 'Home',
 					component: Home,
@@ -51,5 +51,4 @@ export default new Router({
 			component: BorrowMoney
 		}
 	]
-
 })
