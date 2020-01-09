@@ -21,7 +21,7 @@
           </el-button>
         </el-form-item>
         <el-form-item>
-          <a href="" @click="goPath('Login')"><span style="color: gray">返回登录</span></a>
+          <a  @click="goPath('/Index/Login')"><span style="color: gray">返回登录</span></a>
           <el-button class="loginBut" type="primary" plain @click="register('form')">注册</el-button>
         </el-form-item>
       </el-form>
@@ -100,7 +100,7 @@
     methods: {
       goPath(path){
         // this.$router.replace();
-        this.$router.push({path:'/'+path+''});
+        this.$router.push(path);
       },
       register: function(formName) {
         this.$refs[formName].validate((valid) => {
@@ -126,7 +126,7 @@
                   message: '注册成功',
                   type: 'success'
                 })
-                this.$router.push('/');
+                this.$router.push('/Index/InvestHome');
               } else {
                 this.$message({
                   message: '注册失败',
@@ -174,7 +174,7 @@
   }
 </script>
 
-<style>
+<style scoped="scoped">
   .loginToHome {
     position: absolute;
     left: 0px;
@@ -184,6 +184,7 @@
     margin: auto;
     width: 460px;
     height: 420px;
+     margin-top:10%;
     -webkit-border-radius: 5px;
     border-radius: 5px;
     background: #fff;

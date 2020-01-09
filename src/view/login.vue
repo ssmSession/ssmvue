@@ -41,7 +41,7 @@
 							message: '登录成功',
 							type: 'success'
 						})
-						
+
 						console.log(response.data.data.id);
 
 						this.$store.commit('setsysUser', {
@@ -49,7 +49,7 @@
 							sysUserName:response.data.data.username
 						});
 
-						this.$router.push('/'); //跳转到首页
+						this.$router.push('/Index/InvestHome'); //跳转到首页
 					} else {
 						this.$message({
 							message: '用户名或者密码错误录',
@@ -76,6 +76,7 @@
 		margin: auto;
 		width: 400px;
 		height: 300px;
+    margin-top:15%;
 		-webkit-border-radius: 5px;
 		border-radius: 5px;
 		background: #fff;
