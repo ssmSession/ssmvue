@@ -19,6 +19,10 @@ export default {
 	'TESTIDENTITY': '/testIdentity', //判断身份证是否真实
 	
 	
+	
+	'OUTLOADFILE':'/outLoadFile',
+	
+	
 	'getFullPath': k => { //获得请求的完整地址，用于mockjs测试时使用
 		return this.SERVER + this[k];
 	}

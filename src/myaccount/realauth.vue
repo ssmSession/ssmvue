@@ -20,20 +20,20 @@
 				<el-input class="inputcss" v-model="formInline.bornDate" placeholder="请输入生日"></el-input>
 			</el-form-item>
 
-			<el-form-item label="身份证地址" class="item500">
-				<el-input class="inputcss" v-model="formInline.address" placeholder="身份证地址"></el-input>
+			<el-form-item label="现居地地址" class="item500">
+				<el-input class="inputcss" v-model="formInline.address" placeholder="现居地地址"></el-input>
 			</el-form-item>
-
-
 
 			<el-form-item label="备注" class="item500">
 				<el-input class="inputcss" v-model="formInline.remark" placeholder="请输备注"></el-input>
 			</el-form-item>
 
-
 			<el-form-item label="正面照片" class="item400" style="margin-right: 100px;">
-				<el-upload :action="uploadurl" ref="upload" :data="mydata" list-type="picture-card" :on-change="chageFile"
-				 :auto-upload="false" :on-success="successFile" :drag="true">
+
+				<img :src="uploadUrl1" v-show="!upload1" width="300px" style="height: 170px;" />
+
+				<el-upload :action="uploadurl" ref="upload1" :data="mydata" list-type="picture-card" :on-change="chageFile"
+				 :auto-upload="false" :on-success="successFile1" v-show="upload1" :drag="true">
 					<i slot="default" class="el-icon-plus"></i>
 					<div slot="file" slot-scope="{file}">
 						<img class="el-upload-list__item-thumbnail" :src="file.url" alt="">
@@ -47,7 +47,7 @@
 							<span v-if="!disabled" class="el-upload-list__item-delete" @click="handleRemove(file)">
 								<i class="el-icon-delete"></i>
 							</span>
-							<span v-if="!disabled" class="el-upload-list__item-delete" @click="uplloadFile(file)">
+							<span v-if="!disabled" class="el-upload-list__item-delete" @click="uplloadFile1(file)">
 								<i class="el-icon-upload2"></i>
 							</span>
 						</span>
@@ -55,9 +55,12 @@
 				</el-upload>
 			</el-form-item>
 
-			<el-form-item label="反面照片" class="item400" style="">
-				<el-upload :action="uploadurl" v-show="oploadVisible1" ref="upload" :data="mydata" list-type="picture-card"
-				 :auto-upload="false" :on-success="successFile" :drag="true">
+			<el-form-item label="反面照片" class="item400" style="margin-right: 100px;">
+
+				<img :src="uploadUrl2" v-show="!upload2" width="300px" style="height: 170px;" />
+
+				<el-upload :action="uploadurl" ref="upload2" :data="mydata" list-type="picture-card" :on-change="chageFile"
+				 :auto-upload="false" :on-success="successFile2" v-show="upload2" :drag="true">
 					<i slot="default" class="el-icon-plus"></i>
 					<div slot="file" slot-scope="{file}">
 						<img class="el-upload-list__item-thumbnail" :src="file.url" alt="">
@@ -71,19 +74,21 @@
 							<span v-if="!disabled" class="el-upload-list__item-delete" @click="handleRemove(file)">
 								<i class="el-icon-delete"></i>
 							</span>
-							<span v-if="!disabled" class="el-upload-list__item-delete" @click="uplloadFile(file)">
+							<span v-if="!disabled" class="el-upload-list__item-delete" @click="uplloadFile2(file)">
 								<i class="el-icon-upload2"></i>
 							</span>
 						</span>
 					</div>
 				</el-upload>
 			</el-form-item>
+
+
 
 			<el-form-item label="" class="item500">
 				<el-button type="success" @click="testIdNumber()" plain>点击测试实名认证</el-button>
 			</el-form-item>
 			<el-form-item label="" class="item500">
-				<el-button type="info" :disabled="!testIdCode" plain>提交认证</el-button>
+				<el-button type="info" :disabled="!testIdCode" plain @click="onSubmit()">提交认证</el-button>
 			</el-form-item>
 
 		</el-form>
@@ -108,9 +113,15 @@
 					region: '', //用户性别
 					idNumber: '', //用户身份证
 					bornDate: '', //生日
+					address:'',//现居地地址
+					remark:'',// 备注
 				},
 				uploadurl: 'http://localhost:8080/upload', //文件上传的地址
 				dialogImageUrl: '', //显示图片的地址
+				upload1: true, //第一个文件上传
+				uploadUrl1: null, //第一个文件上传的url
+				upload2: true, //第二个文件上传
+				uploadUrl2: null, //第二个文件上传的url
 				dialogVisible: false,
 				oploadVisible1: true,
 				oploadVisible2: true,
@@ -129,7 +140,12 @@
 
 		methods: {
 			onSubmit() {
-				console.log('submit!');
+				this.formInline.images1 = this.uploadUrl1;
+				this.formInline.images2 = this.uploadUrl2;
+				
+				
+				console.log(this.formInline);
+				
 			},
 			handleRemove(file) {
 				console.log(file);
@@ -142,15 +158,30 @@
 				console.log(file);
 			},
 			//文件上传
-			uplloadFile(file) {
-				this.$refs.upload.submit();
+			uplloadFile1(file) {
+				this.$refs.upload1.submit();
 			},
 			//文件上传成功时候的钩子
-			successFile(response, file, fileList) {
+			successFile1(response, file, fileList) {
 				if (file.status == "success") {
-					console.log("success");
+					console.log(response.data);
+					// console.log("success");
+					this.upload1 = false;
+					this.uploadUrl1 = "http://localhost:8080/outLoadFile?path=" + response.data;
 				}
-				console.log(response);
+			},
+
+			//文件上传
+			uplloadFile2(file) {
+				this.$refs.upload2.submit();
+			},
+			//文件上传成功时候的钩子
+			successFile2(response, file, fileList) {
+				if (file.status == "success") {
+					// console.log("success");
+					this.upload2 = false;
+					this.uploadUrl2 = "http://localhost:8080/outLoadFile?path=" + response.data;
+				}
 			},
 
 			/**
@@ -158,9 +189,7 @@
 			 */
 			chageFile(file, fileList) {
 				if ('ready' == file.status) {
-					console.log(this.dialogImageUrl);
 					this.oploadVisible1 = false;
-					console.log(this.dialogImageUrl);
 				}
 			},
 			//根据所填写的身份证信息自动赋值生日
@@ -205,11 +234,12 @@
 				let url = this.axios.urls.TESTIDENTITY;
 				// 查询 身份证信息是否一致性
 				this.axios.post(url, param).then(resp => {
+					console.log(resp.data);
 					if (resp.data.code != -1) {
-						this.testIdCode = resp.data.data;
-						this.$message.success('恭喜你认证成功');
+						this.testIdCode = true;
+						this.$message.success(resp.data.message);
 					} else {
-						this.$message.error('身份异常！！！');
+						this.$message.error(resp.data.message);
 					}
 				}).catch(error => {
 					alert(error);
