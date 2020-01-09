@@ -17,13 +17,10 @@ export default {
 	'GETIPLOGBYMAXDATE': '/getIplogByMaxDate',//获取最近一次登录的信息
 	'SELECTACCOUNTBYID': '/account/selectAccountById', //查询用户账户信息
 	'TESTIDENTITY': '/testIdentity', //判断身份证是否真实
-
-
   'ALLSTATE':'/loadState',//查询所有状态
   'ALLREALTH':'/loadReath',//查询所有实名认证
   'CHECKREALAUTH':'/updateRealauth',//审核
-
-
+	'OUTLOADFILE':'/outLoadFile',
 	'getFullPath': k => { //获得请求的完整地址，用于mockjs测试时使用
 		return this.SERVER + this[k];
 	}
