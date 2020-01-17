@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Home from '@/admin/Home'
 import pum from '@/admin/security/pum'
 import staff from '@/admin/security/staff'
+import Certification from '@/admin/check/Certification'
 import Login from '@/view/login'
 import BorrowMoney from '@/invest/BorrowMoney'
 import InvestList from '@/investment/investinform/InvestList'
@@ -32,6 +33,7 @@ export default new Router({
 			name: 'Register',
 			component: Register
 		},
+	routes: [
 		{
 			path: '/',
 			name: 'Index',
@@ -41,6 +43,16 @@ export default new Router({
 					name: 'BorrowMoney',
 					component: BorrowMoney
 				},
+        {
+        	path: '/Index/Login',
+        	name: 'Login',
+        	component: Login
+        },
+        {
+        	path: '/Index/Register',
+        	name: 'Register',
+        	component: Register
+        },
 				{
 					path: '/Index/InvestList',
 					name: 'InvestList',
@@ -95,6 +107,11 @@ export default new Router({
 					name: 'staff',
 					component: staff,
 				},
+				{
+					path:'/check/Certification',
+					name:'Certification',
+					component:Certification
+				}
 			]
 		}
 	]

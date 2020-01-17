@@ -1,9 +1,9 @@
 <template>
 	<el-row>
 		<el-col style="width: 100%; height: 50px;" :span="12">
-			<el-link style="height: 50px; left: 350px; right: 0px;  position: relative;" plain icon="el-icon-s-home" @click="goPath('BorrowMoney')">返回首页</el-link>
-			<el-link v-if="this.user == null" style="height: 50px; left: 430px;  position: relative;" @click="goUser('Register')">注册</el-link>
-			<el-link v-if="this.user == null" style="height: 50px; left: 520px;  position: relative;" @click="goUser('Login')">登录</el-link>
+			<el-link style="height: 50px; left: 350px; right: 0px;  position: relative;" plain icon="el-icon-s-home" @click="goPath('InvestHome')">返回首页</el-link>
+			<el-link v-if="this.user == null" style="height: 50px; left: 430px;  position: relative;" @click="goPath('Register')">注册</el-link>
+			<el-link v-if="this.user == null" style="height: 50px; left: 520px;  position: relative;" @click="goPath('Login')">登录</el-link>
 			<el-link v-if="this.user != null" style="height: 50px; left: 520px;  position: relative;" @click="goUser('Login')">{{user.uname}}</el-link>
 			<el-link v-if="this.user != null" style="height: 50px; left: 520px;  position: relative;" @click="logout()">退出登录</el-link>
 		</el-col>
@@ -64,7 +64,7 @@
     }
 </script>
 
-<style type="text/css">
+<style type="text/css" scoped="scoped">
 	#app {
 		font-family: 'Avenir', Helvetica, Arial, sans-serif;
 		-webkit-font-smoothing: antialiased;

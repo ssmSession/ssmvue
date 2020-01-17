@@ -22,6 +22,10 @@ export default {
 	'GETDAYS':'/getDays',//查询招标天数
 	'SUBMITAPPLICATION':'/submitApplication',//提交申请
 	
+  'ALLSTATE':'/loadState',//查询所有状态
+  'ALLREALTH':'/loadReath',//查询所有实名认证
+  'CHECKREALAUTH':'/updateRealauth',//审核
+	'OUTLOADFILE':'/outLoadFile',
 	'getFullPath': k => { //获得请求的完整地址，用于mockjs测试时使用
 		return this.SERVER + this[k];
 	}
