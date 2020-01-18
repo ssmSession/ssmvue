@@ -63,8 +63,6 @@
       </el-table-column>
       <el-table-column label="真实姓名" prop="realname">
       </el-table-column>
-      <!-- <el-table-column label="身份证正面" prop="image1" style="display: none;">
-      </el-table-column> -->
       <el-table-column label="性别" prop="sex">
         <template slot-scope="scope">
           {{scope.row.sex == 0 ? '男' : '女'}}
@@ -82,7 +80,7 @@
             <el-button type="primary" plain size="small" class="el-icon-edit" @click="checked(scope.row)"></el-button>
           </el-tooltip>
           <el-tooltip class="item" effect="dark" placement="bottom-start" content="删除">
-            <el-button type="danger" plain size="small" class="el-icon-delete" @click="delRealauth()"></el-button>
+            <el-button type="danger" plain size="small" class="el-icon-delete" @click="delRealauth(scope.row)"></el-button>
           </el-tooltip>
         </template>
       </el-table-column>
@@ -103,12 +101,12 @@
         <el-form-item label="身份地址" prop="address" :label-width="formLabelWidth">
           <el-input v-model="realthForm.address" autocomplete="off" :style="{width: formEleWidth}"></el-input>
         </el-form-item>
-        <el-form-item label="身份证正面" prop="image1" :label-width="formLabelWidth">
-          <img :src="realthForm.image1" alt="" style="width:200px;height:150px;" />
+        <el-form-item label="身份证正面" :label-width="formLabelWidth">
+          <img :src="baseurl+realthForm.image1" alt="" style="width:200px;height:150px;" />
           <!-- <el-input v-model="realthForm.image1" autocomplete="off" style="400px;"></el-input> -->
         </el-form-item>
         <el-form-item label="身份证反面" prop="image2" :label-width="formLabelWidth">
-          <img :src="realthForm.image2" alt="" style="width:200px;height:150px;" />
+          <img :src="baseurl+ realthForm.image2" alt="" style="width:200px;height:150px;" />
           <!-- <el-input v-model="realthForm.image2" autocomplete="off" style="400px;"></el-input> -->
         </el-form-item>
         <el-form-item label="性别" prop="sex" :label-width="formLabelWidth">
@@ -125,9 +123,7 @@
           </template>
         </el-form-item>
       </el-form>
-
     </el-dialog>
-
 
     <!--分页-->
     <div class="block" style="text-align:right;margin-top:10px;">
@@ -149,6 +145,7 @@
     name: 'Certification',
     data() {
       return {
+        baseurl: 'http://localhost:8080/outLoadFile?path=',
         state: '',
         stateData: [],
         chanceDate: [],
@@ -195,7 +192,6 @@
         }).then(resp => {
           this.chanceDate = resp.data.data;
           this.total = resp.data.total;
-          // console.log(resp.data.data);
           // console.log(this.state);
         }).catch(error => {
           alert(error);
@@ -209,6 +205,9 @@
         this.realthForm.address = row.address;
         this.realthForm.image1 = row.image1;
         this.realthForm.image2 = row.image2;
+        // console.log(this.baseurl+row.image1);
+        // console.log(this.realthForm.image1);
+        // console.log(row.image2);
         this.realthForm.sex = row.sex;
         this.dialogFormVisible = true;
         this.rid = row.id; //存储审核id
@@ -267,8 +266,35 @@
           alert(error);
         })
       },
-      delRealauth: function() { //删除审核
-
+      delRealauth: function(row) { //删除审核
+       let url = this.axios.urls.DELREALAUTH + "?id=" + row.id;
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.axios.delete(url).then(resp => {
+            if (resp.data.code) {
+              this.$message({
+                message: '删除成功',
+                type: 'success'
+              });
+              this.query();
+            } else {
+              this.$message({
+                message: '删除失败',
+                type: 'error'
+              });
+            }
+          }).catch(error => {
+            alert(error);
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
       },
       handleSizeChange: function(rows) {
         this.rows = rows;
@@ -289,5 +315,5 @@
   }
 </script>
 
-<style>
+<style scoped="scoped">
 </style>

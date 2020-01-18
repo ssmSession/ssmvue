@@ -17,6 +17,7 @@ import myaccount from '@/myaccount/myaccount_index'
 import InvestHome from '@/Invest/InvestHome'
 import accountinfo from '@/myaccount/accountinfo'
 import realauth from '@/myaccount/realauth'
+import Systemdictionary from '@/admin/dict/Systemdictionary'
 
 
 
@@ -102,7 +103,12 @@ export default new Router({
 					path:'/check/Certification',
 					name:'Certification',
 					component:Certification
-				}
+				},
+        {
+        	path:'/dict/Systemdictionary',
+        	name:'Systemdictionary',
+        	component:Systemdictionary
+        }
 			]
 		}
 	]

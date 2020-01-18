@@ -4,7 +4,7 @@
 			<i class="el-icon-ice-cream-round">用户名</i>
 			<el-input placeholder="请输入内容" style="width: 20%;" v-model="username" clearable>
 			</el-input>
-			<el-button type="info" @click="getData">查询</el-button>
+			<el-button type="primary" icon="el-icon-search" plain @click="getData">查询</el-button>
 		</div>
 
 		<el-table :data="tableData" style="width: 94%;margin-left: 3%;">
@@ -20,12 +20,12 @@
 					<!-- <el-input v-model="" placeholder="请输入内容"></el-input> -->
 				</template>
 			</el-table-column>
-			<el-table-column label="操作" width="300px">
+			<el-table-column label="操作" width="340px">
 				<template slot-scope="scope">
-					<el-button type="warning" @click="getUserInfo(scope.row)">查看</el-button>
-					<el-button type="warning" v-show="scope.row.state == 0" @click="updateState(scope.row)">禁用</el-button>
-					<el-button type="warning" v-show="scope.row.state == 1" @click="updateState(scope.row)">取消禁用</el-button>
-					<el-button type="danger" @click="delLoginInfo(scope.row)">删除</el-button>
+					<el-button type="warning" plain @click="getUserInfo(scope.row)">查看</el-button>
+					<el-button type="info" plain v-show="scope.row.state == 0" @click="updateState(scope.row)">禁用</el-button>
+					<el-button type="success" plain v-show="scope.row.state == 1" @click="updateState(scope.row)">取消禁用</el-button>
+					<el-button type="danger" plain @click="delLoginInfo(scope.row)">删除</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -101,7 +101,7 @@
 			getData() {
 				let url = this.axios.urls.GETLOGININFOBYUSERTYPE;
 				let param = {
-					userType: 1
+					userType:0
 				}
 				this.axios.post(url, param).then(response => {
 					this.tableData = response.data.data;
@@ -153,16 +153,16 @@
 					});
 				});
 			},
-			//修改用户类型
+			//修改用户状态
 			updateState(row) {
-				let usertype = 0;
+				let userstate = 0;
 				if (row.state == 0) {
-					usertype = 1;
+					userstate = 1;
 				}
 				let url = this.axios.urls.UPDATELOGININFOSTATE;
 				let param = {
 					id: row.id,
-					state: usertype
+					state: userstate
 				}
 				this.axios.post(url, param).then(response => {
 					// this.tableData = response.data.data;
