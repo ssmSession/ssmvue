@@ -18,6 +18,11 @@ export default {
 	'GETIPLOGBYMAXDATE': '/getIplogByMaxDate',//获取最近一次登录的信息
 	'SELECTACCOUNTBYID': '/account/selectAccountById', //查询用户账户信息
 	'TESTIDENTITY': '/testIdentity', //判断身份证是否真实
+	'GETUSERINFOBYSTATE':'/getUserInfoByState' ,//根据用户id查询状态是否为已完成实名认证 
+	'GETMONTHS':'/getMonths',//查询月份（下拉框）
+	'GETDAYS':'/getDays',//查询招标天数
+	'SUBMITAPPLICATION':'/submitApplication',//提交申请
+	
   'ALLSTATE':'/loadState',//查询所有状态
   'ALLREALTH':'/loadReath',//查询所有实名认证
   'CHECKREALAUTH':'/updateRealauth',//审核

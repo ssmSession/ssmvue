@@ -1,17 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-
 import Home from '@/admin/Home'
 import pum from '@/admin/security/pum'
 import staff from '@/admin/security/staff'
 import Certification from '@/admin/check/Certification'
 import Login from '@/view/login'
 import BorrowMoney from '@/invest/BorrowMoney'
-import AboutOur from '@/invest/AboutOur'
-import Index from '@/invest/index'
-import Register from '@/view/register'
 import InvestList from '@/investment/investinform/InvestList'
+import AboutOur from '@/invest/AboutOur.vue'
+import Index from '@/invest/index.vue'
+import Register from '@/view/register.vue'
 import Main from '@/admin/Main'
 import myaccount from '@/myaccount/myaccount_index'
 import InvestHome from '@/Invest/InvestHome'
@@ -24,6 +23,17 @@ import Systemdictionary from '@/admin/dict/Systemdictionary'
 Vue.use(Router)
 
 export default new Router({
+
+	routes: [{
+			path: '/Login',
+			name: 'Login',
+			component: Login
+		},
+		{
+			path: '/Register',
+			name: 'Register',
+			component: Register
+		},
 	routes: [
 		{
 			path: '/',
@@ -58,8 +68,7 @@ export default new Router({
 					path: '/Index/myaccount',
 					name: 'myaccount',
 					component: myaccount,
-					children:[
-						{
+					children: [{
 							path: '/Index/myaccount/accountinfo',
 							name: 'accountinfo',
 							component: accountinfo
@@ -112,5 +121,4 @@ export default new Router({
 			]
 		}
 	]
-
 })
